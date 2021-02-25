@@ -1,14 +1,19 @@
 import random
 
+from .Part import Part
+
 class Source:
     def __init__(
         self,
         name='Source',
-        interarrival_time=None
+        interarrival_time=None,
+        part_type=Part
     ):
         self.name = name
         self.interarrival_time = interarrival_time
         self.last_arrival = 0
+
+        self.part_type = part_type
         
         if self.interarrival_time is None:
             self.level = float('inf')
@@ -23,6 +28,8 @@ class Source:
         # schedule inital get events for each downstream machine
         # currently it's assumed that no machine pulling from a source is starved
         self.reserved_content = 0
+
+        self.part_id = 1
 
         for receiver in self.downstream:
             if receiver.can_receive():
@@ -45,11 +52,16 @@ class Source:
             
     def get(self, quantity=1):
         self.reserved_content -= quantity
-        if self.interarrival_time is None:
-            return
+        #if self.interarrival_time is None:
+        #    return
         
         if not self.is_empty():
             self.level -= quantity
+            new_part = self.part_type(id_=self.part_id)
+            new_part.initialize()
+            self.part_id += 1
+            
+            return new_part
         else:
             raise RuntimeError('Attempting to take part from source before arrival.')
     

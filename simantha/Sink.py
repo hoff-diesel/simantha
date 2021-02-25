@@ -4,6 +4,7 @@ class Sink:
         self.capacity = float('inf')
         self.initial_level = initial_level
         self.level = initial_level
+        self.contents = []
 
         self.selection_priority = 1 
 
@@ -13,13 +14,15 @@ class Sink:
 
     def initialize(self):
         self.level = self.initial_level
+        self.contents = []
 
     def reserve_vacancy(self, quantity=1):
         return
 
-    def put(self, quantity=1):
+    def put(self, part, quantity=1):
         if self.env.now > self.env.warm_up_time:
             self.level += quantity
+            self.contents.append(part)
 
         # self.level_data['time'].append(self.env.now)
         # self.level_data['level'].append(self.level)

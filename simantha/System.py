@@ -1,6 +1,7 @@
 import copy
 import multiprocessing
 import random
+import sys
 import time
 import warnings
 
@@ -79,7 +80,7 @@ class System:
 
         self.maintainer.env = self.env
         self.maintainer.system = self
-        self.maintainer.utilization = 0
+        self.maintainer.initialize()
 
         self.warm_up_time = warm_up_time
         self.simulation_time = simulation_time
@@ -138,32 +139,36 @@ class System:
         simulation_time, 
         store_system_state=False
     ):
-        random.seed()
+        try:
+            random.seed()
+            
+            self.simulate(
+                warm_up_time, 
+                simulation_time, 
+                verbose=False, 
+                collect_data=store_system_state
+            )
+
+            availability = [
+                (1 - machine.downtime/(warm_up_time+simulation_time)) 
+                for machine in self.machines
+            ]
+
+            machine_production = [machine.parts_made for machine in self.machines]
+
+            system_production = sum([sink.level for sink in self.sinks])
+
+            if store_system_state:
+                system_state = copy.deepcopy(self)
+            else:
+                system_state = None
+
+            return (
+                system_production, 
+                machine_production, 
+                availability, 
+                system_state
+            )
         
-        self.simulate(
-            warm_up_time, 
-            simulation_time, 
-            verbose=False, 
-            collect_data=store_system_state
-        )
-
-        availability = [
-            (1 - machine.downtime/(warm_up_time+simulation_time)) 
-            for machine in self.machines
-        ]
-
-        machine_production = [machine.parts_made for machine in self.machines]
-
-        system_production = sum([sink.level for sink in self.sinks])
-
-        if store_system_state:
-            system_state = copy.deepcopy(self)
-        else:
-            system_state = None
-
-        return (
-            system_production, 
-            machine_production, 
-            availability, 
-            system_state
-        )
+        except:
+            return sys.exc_info()[0]
