@@ -33,10 +33,13 @@ def main():
         machine.define_routing(upstream=[B2], downstream=[sink])
     sink.define_routing(upstream=station3)
 
-    objects = [source] + station1 + [B1] + station2 + [B2] + station3 + [sink]
+    #objects = [source] + station1 + [B1] + station2 + [B2] + station3 + [sink]
+    objects = [source, B1, B2, sink] + station1 + station2 + station3 
+
     system = System(objects)
 
-    system.simulate(simulation_time=utils.WEEK)
+    system.simulate(simulation_time=500)
+#   system.simulate(simulation_time=utils.WEEK)
 
 if __name__ == '__main__':
     main()

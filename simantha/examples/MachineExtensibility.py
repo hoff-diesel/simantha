@@ -80,8 +80,8 @@ def main():
     system.simulate(simulation_time=6*60)
 
     # Print true health and corresponding sensor reading
-    rows = 12
-    print('\ntime  health  sensor reading')
+    rows = 22
+    print('\n time  health  sensor reading')
     for time, reading in zip(
         M1.sensor_data['time'][:rows], M1.sensor_data['reading'][:rows]
     ):

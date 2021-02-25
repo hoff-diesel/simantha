@@ -2,7 +2,7 @@ from simantha import Source, Machine, Sink, System
 
 def main():
     source = Source()
-    M1 = Machine(name='M1', cycle_time=1)
+    M1 = Machine(name='M1', cycle_time=2)
     sink = Sink()
 
     source.define_routing(downstream=[M1])
@@ -11,7 +11,7 @@ def main():
 
     system = System(objects=[source, M1, sink])
 
-    system.simulate(simulation_time=100)
+    system.simulate(simulation_time=500)
 
 if __name__ == '__main__':
     main()
