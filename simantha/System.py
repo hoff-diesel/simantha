@@ -79,7 +79,9 @@ class System:
             obj.initialize()
 
         self.maintainer.env = self.env
-        self.maintainer.system = self
+        #self.maintainer.system = self
+        if self.maintainer.machines is None:
+            self.maintainer.machines = self.machines
         self.maintainer.initialize()
 
         self.warm_up_time = warm_up_time

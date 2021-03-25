@@ -1,11 +1,17 @@
 import random
 
 class Asset:
+    """Parent class for assets in the system. All objects should extend this class.
+
+    Parameters
+    ----------
+    name : str
+        Name of the asset.
+    selection_priority : float, default=1.0
+        Selection priority to break ties among competing simultaneous events. 
+
     """
-    Parent class for assets in the system. All objects should extend this class, and
-    there should be no instances.
-    """
-    def __init__(self, name, selection_priority=1):
+    def __init__(self, name, selection_priority=1.0):
         self.name = name
         # assets with higher priority will be selected over those with lower priority
         # when competing for resources or space. 

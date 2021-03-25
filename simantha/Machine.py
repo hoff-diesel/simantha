@@ -6,6 +6,23 @@ from .Asset import Asset
 from .simulation import *
 
 class Machine(Asset):
+    """
+    Machine that processes parts with optional periodic degradation and failure.
+
+    Parameters
+    ----------
+    name : str
+        Name of this machine.
+    cycle_time: int
+        Cycle time in time units for each part processed by this machine. 
+
+
+    Methods
+    -------
+    initialize_addon_process()
+        Called during the initialization step of a new simulation run.
+
+    """
     def __init__(
         self,
         name=None,
@@ -58,7 +75,7 @@ class Machine(Asset):
         # check if planned failures and degradation are specified (may cause errors)
         if planned_failure is not None and degradation_matrix[0][0] != 1:
             warnings.warn(
-                'Specifying planned failures along with degradtion is untested and may cause errors.'
+                'Specifying planned failures along with degradation is untested and may cause errors.'
             )
         
         # Routing

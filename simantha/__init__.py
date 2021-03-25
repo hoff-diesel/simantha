@@ -1,4 +1,5 @@
 from .System import System
+from .Part import *
 from .Source import *
 from .Machine import *
 from .Buffer import *

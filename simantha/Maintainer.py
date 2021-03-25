@@ -4,14 +4,16 @@ from .simulation import *
 
 class Maintainer:
     # Basic maintainer, follows FIFO by default
-    def __init__(self, name='repairman', capacity=float('inf')):
+    def __init__(self, name='repairman', capacity=float('inf'), machines=None):
         self.name = name
         self.capacity = capacity
 
         self.utilization = 0
 
         self.env = None
-        self.system = None
+        #self.system = None
+
+        self.machines = machines
 
     def initialize(self):
         self.utilization = 0
@@ -40,4 +42,5 @@ class Maintainer:
         return random.choice(candidates)
 
     def get_queue(self):
-        return [machine for machine in self.system.machines if machine.in_queue]
+        #return [machine for machine in self.system.machines if machine.in_queue]
+        return [machine for machine in self.machines if machine.in_queue]
