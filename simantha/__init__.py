@@ -6,7 +6,7 @@ from .Sink import *
 from .Maintainer import *
 from .simulation import *
 from .utils import *
-from .Part import *
+from .Part import Part 
 
 #__name__ = 'simantha'
 
