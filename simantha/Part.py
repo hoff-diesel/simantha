@@ -1,12 +1,16 @@
-#class Part:
-#    def __init__(self, id_):
- #       self.id_ = id_
-  #      self.routing_history = []
+class Part:
+    def __init__(self, id_):
+        self.id_ = id_
+        self.routing_history = []
+        
+    def initialize(self):
+        self.quality=1.0
+        #pass
 
-  #  def initialize(self):
-   #     pass
 
-
+#class QualityPart(Part):
+#    def initialize(self):
+#        self.quality = 1.0
 
  #   def initialize(self):
  #       self.quality = 1.0

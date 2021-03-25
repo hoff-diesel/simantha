@@ -102,6 +102,7 @@ class Machine(Asset):
         self.reserved_content = 0
         self.reserved_vacancy = 0
         self.contents = []
+        self.finished_part=[]
 
         self.blocked = False
         self.starved = True
@@ -180,6 +181,8 @@ class Machine(Asset):
         finished_part = self.contents.pop(0)
 
         self.output_addon_process(finished_part)
+        
+        self.finished_part = finished_part 
 
         self.target_receiver.put(finished_part, 1)
 
