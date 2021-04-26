@@ -16,7 +16,7 @@ class System:
     def __init__(
         self,
         objects=[],
-        maintainer=Maintainer()
+        maintainer=None
     ):
         self.objects = objects
         self.sources = []
@@ -33,9 +33,13 @@ class System:
                 self.buffers.append(obj)
             elif type(obj) == Sink:
                 self.sinks.append(obj)
-        self.maintainer = maintainer
 
-        # put machines at the front as they should be initialized first
+        if maintainer is None:
+            self.maintainer = Maintainer()
+        else:
+            self.maintainer = maintainer
+
+        # Put machines at the front as they should be initialized first
         self.objects.sort(key=lambda obj: not isinstance(obj, Machine))
     
     def initialize(self):
