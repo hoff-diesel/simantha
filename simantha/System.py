@@ -29,9 +29,11 @@ class System:
             #elif type(obj) == Machine:
             elif isinstance(obj, Machine):
                 self.machines.append(obj)
-            elif type(obj) == Buffer:
+            #elif type(obj) == Buffer:
+            elif isinstance(obj, Buffer):
                 self.buffers.append(obj)
-            elif type(obj) == Sink:
+            #elif type(obj) == Sink:
+            elif isinstance(obj, Sink):
                 self.sinks.append(obj)
 
         if maintainer is None:
