@@ -24,7 +24,8 @@ class Sink:
         if self.env.now > self.env.warm_up_time:
             self.level += quantity
             if self.collect_parts:
-                self.contents.append(part)
+                setattr(self.contents, 'time', self.env.now)   ############## ADDED THIS
+                self.contents.append(part) 
 
         # self.level_data['time'].append(self.env.now)
         # self.level_data['level'].append(self.level)
